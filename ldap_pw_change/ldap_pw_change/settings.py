@@ -131,15 +131,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-class HashAlgorithm(enum.Enum):
-    BLOWFISH = "blowfish"
-
-
 # LDAP Settings
 LDAP_URI = ""
 LDAP_BIND = ""
 LDAP_BIND_PW = ""
-LDAP_USER_SEARCH_BASE = ""
-LDAP_USER_PASSWORD_ATTR = "userPassword"
+LDAP_USER_SEARCH_BASE = "dc=example,dc=com"
 LDAP_USER_SEARCH_FILTER = "(&(objectClass=inetOrgPerson)(uid={}))"
-LDAP_PASSWORD_HASHING_ALGORITHM = HashAlgorithm.BLOWFISH
