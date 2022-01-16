@@ -12,6 +12,8 @@ def get_dn(username):
             l.SCOPE_SUBTREE,
             settings.LDAP_USER_SEARCH_FILTER.format(username)
         )
+        if len(ret) == 0:
+            raise l.NO_SUCH_OBJECT
     except l.NO_SUCH_OBJECT:
         print(f"There's no user with username: {username}")
         return None
