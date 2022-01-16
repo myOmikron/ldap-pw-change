@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #181818;
+            color: white;
+            font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .foo {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            width: 15rem;
+            justify-content: center;
+            align-content: center;
+        }
+
+        .foo label {
+            margin-bottom: 0.5rem;
+        }
+
+        .input {
+            width: 100%;
+            background-color: #222222;
+            padding: 0.25rem;
+            border: 1px solid #333333;
+            border-radius: 4px;
+            color: #ddd;
+            transition: all ease-in-out 200ms;
+        }
+
+        .input:hover {
+            border: 1px solid #c93356;
+        }
+
+        .button {
+            background-color: #c93356;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all ease-in-out 200ms;
+            padding: 0.25rem;
+        }
+
+        .button:hover {
+            background-color: #e55879;
+        }
+    </style>
+</head>
+<body>
+    <form action="/" method="POST" class="foo">
+        {% csrf_token %}
+        <h1>Password change</h1>
+        <label>Username<input class="input" name="username" required></label>
+        <label>Current password<input class="input" name="password" type="password" required></label>
+        <label>New password<input class="input" name="new_password" type="password" required></label>
+        <label>Repeat new password<input class="input" name="new_password_2" type="password" required></label>
+        <button class="button">Submit</button>
+    </form>
+</body>
+</html>

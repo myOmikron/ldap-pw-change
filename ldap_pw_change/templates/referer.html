@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LDAP Selfservice password change</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #181818;
+            color: white;
+            font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        a {
+            color: white;
+            transition: all ease-in-out 200ms;
+        }
+
+        a:hover {
+            color: #c93356;
+        }
+    </style>
+</head>
+<body>
+<div class="center">
+    <h2>{{ message }}</h2>
+    <a href="{{ request.META.HTTP_REFERER }}">Take me back!</a>
+</div>
+</body>
+</html>
