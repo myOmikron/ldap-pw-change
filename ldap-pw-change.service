@@ -1,0 +1,23 @@
+[Unit]
+Description=LDAP Passwordchange Tool
+Requires=ldap-pw-change.socket
+After=network.target
+
+[Service]
+Type=notify
+# the specific user that our service will run as
+User=ldap-pw-change
+Group=ldap-pw-change
+# another option for an even more restricted service is
+# DynamicUser=yes
+# see http://0pointer.net/blog/dynamic-users-with-systemd.html
+RuntimeDirectory=gunicorn
+WorkingDirectory=/usr/sbin/ldap-pw-change/ldap_pw_change/
+ExecStart=/usr/sbin/ldap-pw-change/venv/bin/gunicorn -c /etc/ldap-pw-change/gunicorn.conf.py ldap_pw_change.wsgi
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
