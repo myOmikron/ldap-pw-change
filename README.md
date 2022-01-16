@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-apt install python3 python3-pip python3-venv libldap2-dev libsasl2-dev ldap-utils
+apt install nginx python3 python3-pip python3-venv libldap2-dev libsasl2-dev ldap-utils
 useradd -m -r -d /usr/sbin/ldap-pw-change -s /bin/bash ldap-pw-change
 rm /etc/nginx/sites-available/default
 rm /etc/nginx/sites-enabled/default
@@ -13,7 +13,7 @@ cp -r ldap_pw_change/ /usr/sbin/ldap-pw-change/
 cp requirements.txt /usr/sbin/ldap-pw-change/
 chown -R ldap-pw-change: /usr/sbin/ldap-pw-change/
 su - ldap-pw-change -c 'python3 -m venv venv'
-su - ldap-pw-change -c 'venv/bin/python3 -m pip install -r requirements.txt --user'
+su - ldap-pw-change -c 'venv/bin/python3 -m pip install -r requirements.txt'
 mkdir /var/log/ldap-pw-change/
 chown ldap-pw-change: /var/log/ldap-pw-change/
 mkdir /etc/ldap-pw-change/
