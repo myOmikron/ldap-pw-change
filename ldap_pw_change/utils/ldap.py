@@ -1,4 +1,3 @@
-import ldap
 import ldap as l
 
 from ldap_pw_change import settings
@@ -13,7 +12,7 @@ def get_dn(username):
             l.SCOPE_SUBTREE,
             settings.LDAP_USER_SEARCH_FILTER.format(username)
         )
-    except ldap.NO_SUCH_OBJECT:
+    except l.NO_SUCH_OBJECT:
         print(f"There's no user with username: {username}")
         return None
     conn.unbind_s()
