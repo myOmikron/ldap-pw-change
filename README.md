@@ -29,3 +29,18 @@ systemctl start ldap-pw-change.socket
 systemctl start ldap-pw-change.service
 systemctl reload nginx
 ```
+
+## Configuration
+
+In order to use the project following configurations has to be done:
+- Set the `ALLOWED_HOSTS` in `/etc/ldap-pw-change/settings.py`
+- Set the `CSRF_TRUSTED_ORIGINS` in `/etc/ldap-pw-change/settings.py`
+- Set the `SECRET_KEY` 
+- Set `DEBUG` to False
+- Configure the LDAP Settings in the bottom of `/etc/ldap-pw-change/settings.py`
+- Restart the project
+
+
+If you plan to use nginx as a reverse proxy, you can use the included nginx file as a reference.
+
+
