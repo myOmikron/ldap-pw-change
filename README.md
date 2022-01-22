@@ -33,13 +33,14 @@ systemctl reload nginx
 ## Configuration
 
 In order to use the project following configurations has to be done:
-- Set the `ALLOWED_HOSTS` in `/etc/ldap-pw-change/settings.py`
-- Set the `CSRF_TRUSTED_ORIGINS` in `/etc/ldap-pw-change/settings.py`
-- Set the `SECRET_KEY` 
-- Set `DEBUG` to False
-- Configure the LDAP Settings in the bottom of `/etc/ldap-pw-change/settings.py`
-- Restart the project
+`cp .env.dist ldap_pw_change/.env`
 
+Edit the file and set all values.
+
+In order to generate a `SECRET_KEY`, you can use the following:
+```bash
+python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+```
 
 If you plan to use nginx as a reverse proxy, you can use the included nginx file as a reference.
 

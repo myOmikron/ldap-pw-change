@@ -13,25 +13,23 @@ import enum
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import environ
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+environ.Env.read_env(BASE_DIR / ".env")
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+DEBUG = env("DEBUG")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'change_me'
+SECRET_KEY = env("SECRET_KEY")
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
-ALLOWED_HOSTS = [
-
-]
-
-CSRF_TRUSTED_ORIGINS = [
-
-]
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS")
 
 # Application definition
 
@@ -132,8 +130,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # LDAP Settings
-LDAP_URI = ""
-LDAP_BIND = ""
-LDAP_BIND_PW = ""
-LDAP_USER_SEARCH_BASE = "dc=example,dc=com"
-LDAP_USER_SEARCH_FILTER = "(&(objectClass=inetOrgPerson)(uid={}))"
+LDAP_URI = env("LDAP_URI")
+LDAP_BIND = env("LDAP_BIND")
+LDAP_BIND_PW = env("LDAP_BIND_PW")
+LDAP_USER_SEARCH_BASE = env("LDAP_USER_SEARCH_BASE")
+LDAP_USER_SEARCH_FILTER = env("LDAP_USER_SEARCH_FILTER")
