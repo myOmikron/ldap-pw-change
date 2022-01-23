@@ -1,4 +1,5 @@
 import ldap as l
+import ldap.filter as f
 
 from ldap_pw_change import settings
 
@@ -10,7 +11,7 @@ def get_dn(username):
         ret = conn.search_s(
             settings.LDAP_USER_SEARCH_BASE,
             l.SCOPE_SUBTREE,
-            settings.LDAP_USER_SEARCH_FILTER.format(username)
+            f.filter_format(settings.LDAP_USER_SEARCH_FILTER, [username])
         )
         if len(ret) == 0:
             raise l.NO_SUCH_OBJECT
