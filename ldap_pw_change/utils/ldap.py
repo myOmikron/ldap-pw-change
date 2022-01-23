@@ -14,25 +14,27 @@ def get_dn(username):
         )
         if len(ret) == 0:
             raise l.NO_SUCH_OBJECT
+        elif len(ret) > 1:
+            print(f"There are more than one result for username: {username}")
+            return None
+        else:
+            return ret[0][0]
     except l.NO_SUCH_OBJECT:
         print(f"There's no user with username: {username}")
         return None
-    conn.unbind_s()
-    if len(ret) > 1:
-        print(f"There are more than one result for username: {username}")
-        return None
-    return ret[0][0]
+    finally:
+        conn.unbind_s()
 
 
 def authenticate(dn, password) -> bool:
     conn = l.initialize(settings.LDAP_URI)
     try:
         conn.bind_s(dn, password)
+        conn.unbind_s()
+        return True
     except l.INVALID_CREDENTIALS:
         print(f"Invalid credentials for dn: {dn}")
         return False
-    conn.unbind_s()
-    return True
 
 
 def change_pw(username, old_password, new_password):
@@ -42,7 +44,10 @@ def change_pw(username, old_password, new_password):
         return False
     if authenticate(dn, old_password):
         conn.bind_s(dn, old_password)
-        conn.passwd_s(dn, old_password, new_password)
-        return True
+        try:
+            conn.passwd_s(dn, old_password, new_password)
+            return True
+        finally:
+            conn.unbind_s()
     else:
         return False
