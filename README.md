@@ -44,4 +44,12 @@ python -c 'from django.core.management.utils import get_random_secret_key; print
 
 If you plan to use nginx as a reverse proxy, you can use the included nginx file as a reference.
 
+### Selfsigned certificates / CA
+
+If you plan using a selfsigned CA, you have to append the `settings.py` with the following:
+
+```python
+import ldap
+ldap.set_option(ldap.OPT_X_TLS_CACERTFILE, "/path/to/ca/certificate.crt")
+```
 
